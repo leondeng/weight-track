@@ -53,7 +53,7 @@
             "php app/console -e=dev doctrine:cache:clear-result"
         ],
         "dev:rebuild-db": [
-            "mysql -e 'CREATE DATABASE IF NOT EXISTS wtrack;' -uroot",
+            "mysql -e 'CREATE DATABASE IF NOT EXISTS wtrack_dev;' -uroot",
             "php app/console -e=dev doctrine:schema:drop --force",
             "php app/console -e=dev doctrine:schema:create",
             "php app/console -e=dev fan:load-fixtures"
