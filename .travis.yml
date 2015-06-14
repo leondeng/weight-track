@@ -4,7 +4,7 @@ php:
 install:
   - composer install
 before_script:
-  - phpenv config-add myconfig.ini
+  - echo 'date.timezone = "Australia/Sydney"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - mysql -e 'create database wtrack_test;'
   - composer test:rebuild-db
 script:
