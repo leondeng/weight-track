@@ -1,0 +1,4 @@
+controller_actions:
+  logging:
+    file: php://stderr
+    verbosity: 0

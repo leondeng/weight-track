@@ -1,3 +1,23 @@
-fan_weight_track_homepage:
-    path:     /
-    defaults: { _controller: FanWeightTrackBundle:Default:index }
+create_goal:
+    path:     /user/{id}/goal
+    defaults: { _controller: FanWeightTrackBundle:WebService:createGoal }
+    requirements:
+        _method:  POST
+
+create_track:
+    path:     /user/{id}/track
+    defaults: { _controller: FanWeightTrackBundle:WebService:createTrack }
+    requirements:
+        _method:  POST
+
+update_track:
+    path:     /user/{id}/track/{date}
+    defaults: { _controller: FanWeightTrackBundle:WebService:updateTrack }
+    requirements:
+        _method:  PUT
+
+delete_track:
+    path:     /user/{id}/track/{date}
+    defaults: { _controller: FanWeightTrackBundle:WebService:deleteTrack }
+    requirements:
+        _method:  DELETE

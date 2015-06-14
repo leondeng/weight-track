@@ -1,0 +1,14 @@
+controller_actions:
+  actions:
+# goal create
+    -
+      test_id: goal_create/0
+      method: POST
+      uri: /user/{id}/goal
+      parameters:
+        id: 1
+      content:
+        goal: 100
+      checks:
+        content_decoded:
+          goal:100

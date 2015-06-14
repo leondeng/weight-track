@@ -1,0 +1,125 @@
+controller_actions:
+  actions:
+# track create
+    -
+      test_id: track_create/0
+      method: POST
+      uri: /user/{id}/track
+      parameters:
+        id: 1
+      content: 
+        weight: 120
+        date: '2015-06-14T00:00:00.000Z'
+      checks:
+        content_decoded:
+          weight: 120
+          date: '2015-06-14T00:00:00.000Z'
+    -
+      test_id: track_create/1
+      method: POST
+      uri: /user/{id}/track
+      parameters:
+        id: 1
+      content: 
+        weight: invalid
+        date: '2015-06-14T00:00:00.000Z'
+      checks:
+        status_code: 500
+        content_decoded:
+          error_code: 901
+          message: Invalid weight!
+    -
+      test_id: track_create/2
+      method: POST
+      uri: /user/{id}/track
+      parameters:
+        id: 1
+      content: 
+        weight: 120
+        date: invalid
+      checks:
+        status_code: 500
+        content_decoded:
+          error_code: 102
+          message: Invalid date!
+
+# track update
+    -
+      test_id: track_update/0
+      method: PUT
+      uri: /user/{id}/track/{date}
+      parameters:
+        id: 1
+        date: 2015-06-05
+      content:
+        weight: 130
+      checks:
+        content_decoded:
+          weight: 130
+          date: '2015-06-05T00:00:00.000Z'
+    -
+      test_id: track_update/1
+      method: PUT
+      uri: /user/{id}/track/{date}
+      parameters:
+        id: 1
+        date: 2015-06-05
+      content:
+        weight: invalid
+      checks:
+        status_code: 500
+        content_decoded:
+          error_code: 902
+          message: Invalid wight!
+    -
+      test_id: track_update/2
+      method: PUT
+      uri: /user/{id}/track/{date}
+      parameters:
+        id: 1
+        date: 2015-01-01
+      content:
+        weight: 150
+      checks:
+        status_code: 400
+        content_decoded:
+          error_code: 902
+          message: Track not found!
+    -
+      test_id: track_update/3
+      method: PUT
+      uri: /user/{id}/track/{date}
+      parameters:
+        id: 1
+        date: 2015-12-01
+      content:
+        weight: 150
+      checks:
+        status_code: 400
+        content_decoded:
+          error_code: 902
+          message: Track not found!
+          
+#track delete
+    -
+      test_id: track_delete/0
+      method: DELETE
+      uri: /user/{id}/track/{date}
+      parameters:
+        id: 1
+        date: 2015-06-05
+      checks:
+        content_decoded:
+          status: ok
+    -
+      test_id: track_delete/1
+      method: DELETE
+      uri: /user/{id}/track/{date}
+      parameters:
+        id: 1
+        date: 2015-01-01
+      checks:
+        status_code: 400
+        content_decoded:
+          error_code: 902
+          message: Track not found!

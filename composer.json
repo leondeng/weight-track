@@ -12,6 +12,7 @@
         "doctrine/orm": "~2.2,>=2.2.3,<2.5",
         "doctrine/dbal": "<2.5",
         "doctrine/doctrine-bundle": "~1.4",
+        "doctrine/data-fixtures": "dev-master",
         "symfony/assetic-bundle": "~2.3",
         "symfony/swiftmailer-bundle": "~2.3",
         "symfony/monolog-bundle": "~2.4",
@@ -44,6 +45,24 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+        ],
+        "dev:clear-cache": [
+            "php app/console -e=dev cache:clear",
+            "php app/console -e=dev doctrine:cache:clear-metadata",
+            "php app/console -e=dev doctrine:cache:clear-query",
+            "php app/console -e=dev doctrine:cache:clear-result"
+        ],
+        "dev:rebuild-db": [
+            "mysql -e 'CREATE DATABASE IF NOT EXISTS wtrack;' -uroot",
+            "php app/console -e=dev doctrine:schema:drop --force",
+            "php app/console -e=dev doctrine:schema:create",
+            "php app/console -e=dev fan:load-fixtures"
+        ],
+        "test:rebuild-db": [
+            "mysql -e 'CREATE DATABASE IF NOT EXISTS wtrack_test;' -uroot",
+            "php app/console -e=test doctrine:schema:drop --force",
+            "php app/console -e=test doctrine:schema:create",
+            "php app/console -e=test fan:load-fixtures"
         ]
     },
     "config": {
