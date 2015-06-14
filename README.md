@@ -1,69 +1,45 @@
-Symfony Standard Edition
-========================
+<div>
+<a href="https://travis-ci.org/leondeng/weight-track.svg">
+<img title="Build Status Images" src="https://travis-ci.org/leondeng/weight-track.svg">
+</a>
+</div>
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony2
-application that you can use as the skeleton for your new applications.
+<h1>Project</h1>
 
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
+<h2>Daily weight goal & progress recording web application</h2>
 
-What's inside?
---------------
+Please build a small web application that allows a user to track their daily weight progress.
 
-The Symfony Standard Edition is configured with the following defaults:
+<h3>Requirements</h3>
 
-  * An AppBundle you can use to start coding;
+<p>
+As a user I want to be able to
 
-  * Twig as the only configured template engine;
+● enter a weight loss goal so I can have something to aim for
 
-  * Doctrine ORM/DBAL;
+● submit a new weight entry for a specific day
 
-  * Swiftmailer;
+● edit or remove a previous entry in case I made a mistake
 
-  * Annotations enabled for everything.
+● view my past entries, with a maximum of 10 shown per page
 
-It comes pre-configured with the following bundles:
+● (EXTRA CREDIT) view a visualisation (graph or similar) of my progress towards my goal
+</p>
 
-  * **FrameworkBundle** - The core Symfony framework bundle
+<h3>Rules</h3>
 
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
+<p>
+● Use any framework or libraries you wish
 
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
+● User interaction with the database should ONLY occur using REST requests (apart
 
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
+from full page GET requests). So you’ll need to build a simple RESTful API
 
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
+● You should have at least one (hopefully more) unit / acceptance tests (eg. PHPUnit / Codeception or similar ­ your choice)
 
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
+● No need to build a user system or authentication ­ hardcode, simulate or assume the user has authenticated
 
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
+● The design of the user interface will not be part of your test, but the implementation of the HTML / CSS / JS will be. It should look functional and finished (albeit simple /
 
-  * [**AsseticBundle**][12] - Adds support for Assetic, an asset processing
-    library
-
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
-
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][13] (in dev/test env) - Adds code generation
-    capabilities
-
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
-
-Enjoy!
-
-[1]:  http://symfony.com/doc/2.7/book/installation.html
-[6]:  http://symfony.com/doc/2.7/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  http://symfony.com/doc/2.7/book/doctrine.html
-[8]:  http://symfony.com/doc/2.7/book/templating.html
-[9]:  http://symfony.com/doc/2.7/book/security.html
-[10]: http://symfony.com/doc/2.7/cookbook/email.html
-[11]: http://symfony.com/doc/2.7/cookbook/logging/monolog.html
-[12]: http://symfony.com/doc/2.7/cookbook/assetic/asset_management.html
-[13]: http://symfony.com/doc/2.7/bundles/SensioGeneratorBundle/index.html
+clean). Using Bootstrap / Foundation or similar is acceptable and encouraged. Your interface should be as functional and usable on a mobile phone as it is on the desktop
+</p>
