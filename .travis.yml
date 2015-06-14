@@ -4,6 +4,7 @@ php:
 install:
   - composer install
 before_script:
+  - phpenv config-add myconfig.ini
   - mysql -e 'create database wtrack_test;'
   - composer test:rebuild-db
 script:

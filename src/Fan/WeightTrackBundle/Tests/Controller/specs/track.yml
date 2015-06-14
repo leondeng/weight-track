@@ -56,7 +56,7 @@ controller_actions:
       checks:
         content_decoded:
           weight: 130
-          date: '2015-06-05T00:00:00+0000'
+          date: '2015-06-05T00:00:00+1000'
     -
       test_id: track_update/1
       method: PUT
@@ -129,7 +129,7 @@ controller_actions:
       checks:
         content_decoded:
           0.weight: 120
-          0.date: '2015-06-14T00:00:00+0000'
+          0.date: '2015-06-14T00:00:00+1000'
           9.weight: 125
-          9.date: '2015-06-05T00:00:00+0000'
+          9.date: '2015-06-05T00:00:00+1000'
           
