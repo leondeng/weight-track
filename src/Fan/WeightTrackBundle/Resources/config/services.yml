@@ -1,0 +1,4 @@
+services:
+#    fan_weight_track.example:
+#        class: Fan\WeightTrackBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
