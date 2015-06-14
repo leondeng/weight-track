@@ -16,15 +16,12 @@ class UserFixture implements SharedFixtureInterface
   }
 
   public function load(ObjectManager $manager) {
-    $user = $this->getUser();
+    $user1 = new User();
+    $user2 = new User();
 
-
-    $manager->persist($user);
-    $this->referenceRepository->addReference('user', $user);
+    $manager->persist($user1);
+    $manager->persist($user2);
+    $this->referenceRepository->addReference('user', $user1);
     $manager->flush();
-  }
-
-  public function getUser() {
-    return new User();
   }
 }

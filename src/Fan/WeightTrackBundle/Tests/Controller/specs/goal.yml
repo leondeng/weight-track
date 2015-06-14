@@ -6,9 +6,34 @@ controller_actions:
       method: POST
       uri: /user/{id}/goal
       parameters:
-        id: 1
+        id: 2
       content:
         goal: 100
       checks:
         content_decoded:
-          goal:100
+          goal: 100
+    -
+      test_id: goal_create/1
+      method: POST
+      uri: /user/{id}/goal
+      parameters:
+        id: 100
+      content:
+        goal: 100
+      checks:
+        status_code: 404
+        content_decoded:
+          message: User not found!
+    -
+      test_id: goal_create/2
+      method: POST
+      uri: /user/{id}/goal
+      parameters:
+        id: 2
+      content:
+        goal: invalid
+      checks:
+        status_code: 500
+        content_decoded:
+          error_code: 901
+          message: Invalid goal!

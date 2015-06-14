@@ -17,7 +17,7 @@ swiftmailer:
 
 doctrine:
     dbal:
-        driver:   "%database_driver%"
+        driver:   pdo_mysql
         host:     "%database_host%"
         port:     "%database_port%"
         dbname:   wtrack_test

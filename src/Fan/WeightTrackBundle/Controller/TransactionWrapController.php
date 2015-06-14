@@ -1,6 +1,6 @@
 <?php
 
-namespace Fan\LawnBotBundle\Controller;
+namespace Fan\WeightTrackBundle\Controller;
 
 interface TransactionWrapController
 {

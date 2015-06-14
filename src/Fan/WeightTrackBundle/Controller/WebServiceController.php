@@ -24,200 +24,120 @@ class WebServiceController extends Controller implements TransactionWrapControll
     $this->getDoctrine()->getManager()->flush();
   }
 
-  public function createLawnAction(Request $request) {
+  public function createGoalAction(Request $request) {
     try {
-      $size = json_decode($request->getContent(), true);
-      if (count($size) != 2 || !isset($size['width']) || !isset($size['height'])) {
-        throw new \Exception('Invalid lawn data!', self::ERROR_CODE_BASE + 1);
-      }
-
-      $size = sprintf('%s %s', $size['width'], $size['height']);
-
-      $lawn = Lawn::create($size);
-      $this->saveEntity($lawn);
-
-      return $this->responseJson($this->serialize($lawn));
-    } catch ( \Exception $e ) {
-      return $this->err500($e);
-    }
-  }
-
-  public function getLawnAction(Request $request) {
-    try {
-      $id = $request->get('id');
-
-      if (!is_numeric($id)) {
-        throw new \Exception('Invalid lawn id!', self::ERROR_CODE_BASE + 2);
-      }
-
       $em = $this->getDoctrine()->getManager();
-      if ($lawn = $em->getRepository('Fan\WeightTrackBundle\Entity\Lawn')->find($id)) {
-        return $this->responseJson($this->serialize($lawn));
-      } else {
-        return $this->err404('Lawn not found!');
-     }
-    } catch (\Exception $e) {
-      return $this->err500($e);
-    }
-  }
-
-  public function deleteLawnAction(Request $request) {
-    try {
-      $id = $request->request->get('id');
-
-      if (!is_numeric($id)) {
-        throw new \Exception('Invalid lawn id!', self::ERROR_CODE_BASE + 2);
-      }
-
-      $em = $this->getDoctrine()->getManager();
-      if ($lawn = $em->getRepository('Fan\WeightTrackBundle\Entity\Lawn')->find($id)) {
-        $em->remove($lawn);
-        $em->flush();
-
-        return new JsonResponse(array('status' => 'ok'));
-      } else {
-        return $this->err404('Lawn not found!');
-      }
-    } catch ( \Exception $e ) {
-      return $this->err500($e);
-    }
-  }
-
-  public function createBotAction(Request $request) {
-    try {
-      $id = $request->request->get('id');
-
-      if (!is_numeric($id)) {
-        throw new \Exception('Invalid lawn id!', self::ERROR_CODE_BASE + 2);
-      }
-
-      $em = $this->getDoctrine()->getManager();
-      if ($lawn = $em->getRepository('Fan\WeightTrackBundle\Entity\Lawn')->find($id)) {
+      if ($user = $em->getRepository('Fan\WeightTrackBundle\Entity\User')->find($request->request->get('id'))) {
         $data = json_decode($request->getContent(), true);
-        if (count($data) != 4 || !isset($data['x']) || !isset($data['y']) || !isset($data['heading']) || !isset($data['command'])) {
-          throw new \Exception('Invalid bot data!', self::ERROR_CODE_BASE + 11);
+        $goal = new Goal();
+        $goal->setGoal($data['goal']);
+        $goal->setUser($user);
+
+        $validator = $this->get('validator');
+        $errors = $validator->validate($goal);
+        if (count($errors) > 0) {
+          $error = $errors->get(0);
+          throw new \Exception($error->getMessage(), self::ERROR_CODE_BASE + 1);
         }
-        $position = sprintf('%s %s %s', $data['x'], $data['y'], $data['heading']);
-        $command = $data['command'];
-        $bot = Bot::create($position, $command);
+        $this->saveEntity($goal);
 
-        $lawn->addBot($bot);
-        $this->saveEntity($lawn);
-
-        return $this->responseJson($this->serialize($bot));
+        return $this->responseJson($this->serialize($goal));
       } else {
-        return $this->err404('Lawn not found!');
+        return $this->err404('User not found!');
       }
     } catch ( \Exception $e ) {
       return $this->err500($e);
     }
   }
 
-  public function getBotAction(Request $request) {
-    try {
-      $id = $request->get('id');
-      $mid = $request->get('mid');
-
-      if (!is_numeric($id)) {
-        throw new \Exception('Invalid lawn id!', self::ERROR_CODE_BASE + 2);
-      }
-
-      if (!is_numeric($mid)) {
-        throw new \Exception('Invalid bot id!', self::ERROR_CODE_BASE + 3);
-      }
-
+  public function createTrackAction(Request $request) {
+  try {
       $em = $this->getDoctrine()->getManager();
-      if ($bot = $em->getRepository('Fan\WeightTrackBundle\Entity\Bot')->findOneBy(array('lawn' => $id, 'id' => $mid))) {
-        return $this->responseJson($this->serialize($bot));
+      if ($user = $em->getRepository('Fan\WeightTrackBundle\Entity\User')->find($request->request->get('id'))) {
+        $data = json_decode($request->getContent(), true);
+        $track = new Track();
+        $track->setWeight($data['weight']);
+        $track->setDate(date_create($data['date']));
+        $track->setUser($user);
+
+        $validator = $this->get('validator');
+        $errors = $validator->validate($track);
+        if (count($errors) > 0) {
+          $error = $errors->get(0);
+          throw new \Exception($error->getMessage(), self::ERROR_CODE_BASE + 2);
+        }
+        $this->saveEntity($track);
+
+        return $this->responseJson($this->serialize($track));
       } else {
-        return $this->err404('Bot not found!');
+        return $this->err404('User not found!');
+      }
+    } catch ( \Exception $e ) {
+      return $this->err500($e);
+    }
+  }
+
+  public function listTracksAction(Request $request) {
+    try {
+      $em = $this->getDoctrine()->getManager();
+      if ($user = $em->getRepository('Fan\WeightTrackBundle\Entity\User')->find($request->query->get('id'))) {
+        $tracks = $user->getTracks();
+        return $this->responseJson($this->serialize($tracks));
+      } else {
+        return $this->err404('User not found!');
      }
     } catch (\Exception $e) {
       return $this->err500($e);
     }
   }
 
-  public function updateBotAction(Request $request) {
+  public function updateTrackAction(Request $request) {
     try {
-      $id = $request->request->get('id');
-      $mid = $request->request->get('mid');
-
-      if (!is_numeric($id)) {
-        throw new \Exception('Invalid lawn id!', self::ERROR_CODE_BASE + 2);
-      }
-
-      if (!is_numeric($mid)) {
-        throw new \Exception('Invalid bot id!', self::ERROR_CODE_BASE + 3);
-      }
+      $userId = $request->request->get('id');
+      $date = date_create(date('Y-m-d', $request->request->get('date')));
 
       $data = json_decode($request->getContent(), true);
 
       $em = $this->getDoctrine()->getManager();
-      if ($bot = $em->getRepository('Fan\WeightTrackBundle\Entity\Bot')->findOneBy(array('lawn' => $id, 'id' => $mid))) {
-        $lawn = $bot->getLawn();
+      if ($track = $em->getRepository('Fan\WeightTrackBundle\Entity\Track')->findOneBy(array('user' => $userId, 'date' => $date))) {
+        $track->setWeight($data['weight']);
+        $track->setDate($date);
 
-        if ($lawn->updateBot($bot, $data)) {
-          $this->saveEntity($bot);
-          return $this->responseJson($this->serialize($bot));
-        } else {
-          return $this->err400('Update bot failed! Reason unknown.');
+        $validator = $this->get('validator');
+        $errors = $validator->validate($track);
+        if (count($errors) > 0) {
+          $error = $errors->get(0);
+          throw new \Exception($error->getMessage(), self::ERROR_CODE_BASE + 2);
         }
+        $this->saveEntity($track);
+
+        return $this->responseJson($this->serialize($track));
      } else {
-        return $this->err404('Bot not found!');
+        return $this->err404('Track not found!');
       }
     } catch ( \Exception $e ) {
       return $this->err500($e);
     }
   }
 
-  public function deleteBotAction(Request $request) {
+  public function deleteTrackAction(Request $request) {
     try {
-      $id = $request->request->get('id');
-      $mid = $request->request->get('mid');
-
-      if (!is_numeric($id)) {
-        throw new \Exception('Invalid lawn id!', self::ERROR_CODE_BASE + 2);
-      }
-
-      if (!is_numeric($mid)) {
-        throw new \Exception('Invalid bot id!', self::ERROR_CODE_BASE + 3);
-      }
+      $userId = $request->request->get('id');
+      $date = date_create(date('Y-m-d', $request->request->get('date')));
 
       $em = $this->getDoctrine()->getManager();
-      if ($bot = $em->getRepository('Fan\WeightTrackBundle\Entity\Bot')->findOneBy(array('lawn' => $id, 'id' => $mid))) {
-        $em->remove($bot);
+      if ($track = $em->getRepository('Fan\WeightTrackBundle\Entity\Track')->findOneBy(array('user' => $userId, 'date' => $date))) {
+        $em->remove($track);
         $em->flush();
 
         return new JsonResponse(array('status' => 'ok'));
       } else {
-        return $this->err404('Bot not found!');
+        return $this->err404('Track not found!');
      }
     } catch (\Exception $e) {
       return $this->err500($e);
     }
 
-  }
-
-  public function mowLawnAction(Request $request) {
-  try {
-      $id = $request->request->get('id');
-
-      if (!is_numeric($id)) {
-        throw new \Exception('Invalid lawn id!', self::ERROR_CODE_BASE + 2);
-      }
-
-      $em = $this->getDoctrine()->getManager();
-      if ($lawn = $em->getRepository('Fan\WeightTrackBundle\Entity\Lawn')->find($id)) {
-        $lawn->mowMe();
-        $this->saveEntity($lawn);
-
-        return $this->responseJson($this->serialize($lawn));
-      } else {
-        return $this->err404('Lawn not found!');
-     }
-    } catch (\Exception $e) {
-      return $this->err500($e);
-    }
   }
 
   private function serialize($object) {

@@ -21,3 +21,9 @@ delete_track:
     defaults: { _controller: FanWeightTrackBundle:WebService:deleteTrack }
     requirements:
         _method:  DELETE
+
+list_tracks:
+    path:     /user/{id}/tracks
+    defaults: { _controller: FanWeightTrackBundle:WebService:listTracks }
+    requirements:
+        _method:  GET

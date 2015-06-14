@@ -28,6 +28,7 @@ class User
 
   /**
    * @ORM\OneToMany(targetEntity="Track", mappedBy="user", cascade={"persist"})
+   * @ORM\OrderBy({"date" = "DESC"})
    */
   private $tracks;
 

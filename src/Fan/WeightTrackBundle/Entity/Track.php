@@ -31,7 +31,7 @@ class Track
    * @ORM\Column(name="weight", type="integer")
    * @Assert\Type(
    *   type="numeric",
-   *   message="Invalid goal!"
+   *   message="Invalid weight!"
    * )
    * @Assert\NotBlank
    */

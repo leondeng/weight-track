@@ -1,8 +1,8 @@
 <?php
 
-namespace Fan\LawnBotBundle\EventListener;
+namespace Fan\WeightTrackBundle\EventListener;
 
-use Fan\LawnBotBundle\Controller\TransactionWrapController;
+use Fan\WeightTrackBundle\Controller\TransactionWrapController;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;

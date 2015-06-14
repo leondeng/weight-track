@@ -1,9 +1,9 @@
 <?php
 
-namespace Fan\LawnBotBundle\Tests\Controller;
+namespace Fan\WeightTrackBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Fan\LawnBotBundle\Tests\TestConfiguration;
+use Fan\WeightTrackBundle\Tests\TestConfiguration;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Doctrine\Common\Inflector\Inflector;
 

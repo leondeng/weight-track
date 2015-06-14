@@ -13,7 +13,7 @@ controller_actions:
       checks:
         content_decoded:
           weight: 120
-          date: '2015-06-14T00:00:00.000Z'
+          date: '2015-06-14T00:00:00+0000'
     -
       test_id: track_create/1
       method: POST
@@ -26,7 +26,7 @@ controller_actions:
       checks:
         status_code: 500
         content_decoded:
-          error_code: 901
+          error_code: 902
           message: Invalid weight!
     -
       test_id: track_create/2
@@ -40,7 +40,7 @@ controller_actions:
       checks:
         status_code: 500
         content_decoded:
-          error_code: 102
+          error_code: 902
           message: Invalid date!
 
 # track update
@@ -56,7 +56,7 @@ controller_actions:
       checks:
         content_decoded:
           weight: 130
-          date: '2015-06-05T00:00:00.000Z'
+          date: '2015-06-05T00:00:00+1000'
     -
       test_id: track_update/1
       method: PUT
@@ -70,7 +70,7 @@ controller_actions:
         status_code: 500
         content_decoded:
           error_code: 902
-          message: Invalid wight!
+          message: Invalid weight!
     -
       test_id: track_update/2
       method: PUT
@@ -81,9 +81,8 @@ controller_actions:
       content:
         weight: 150
       checks:
-        status_code: 400
+        status_code: 404
         content_decoded:
-          error_code: 902
           message: Track not found!
     -
       test_id: track_update/3
@@ -95,11 +94,9 @@ controller_actions:
       content:
         weight: 150
       checks:
-        status_code: 400
+        status_code: 404
         content_decoded:
-          error_code: 902
           message: Track not found!
-          
 #track delete
     -
       test_id: track_delete/0
@@ -119,7 +116,20 @@ controller_actions:
         id: 1
         date: 2015-01-01
       checks:
-        status_code: 400
+        status_code: 404
         content_decoded:
-          error_code: 902
           message: Track not found!
+#tracks list
+    -
+      test_id: track_list/0
+      method: GET
+      uri: /user/{id}/tracks
+      parameters:
+        id: 1
+      checks:
+        content_decoded:
+          0.weight: 120
+          0.date: '2015-06-14T00:00:00+1000'
+          9.weight: 125
+          9.date: '2015-06-05T00:00:00+1000'
+          

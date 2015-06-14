@@ -1,6 +1,6 @@
 <?php
 
-namespace Fan\LawnBotBundle\Tests\Controller;
+namespace Fan\WeightTrackBundle\Tests\Controller;
 
 class WebServiceControllerTest extends ControllerTestCase
 {
