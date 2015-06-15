@@ -41,8 +41,8 @@ monolog:
         #    type:   chromephp
         #    level:  info
 
-assetic:
-    use_controller: true
+#assetic:
+#    use_controller: true
 
 #swiftmailer:
 #    delivery_address: me@example.com
@@ -60,3 +60,14 @@ doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
+
+braincrafted_bootstrap:
+    less_filter: less
+
+assetic:
+    filters:
+        less:
+            node: /usr/bin/node
+            node_paths: [/usr/local/lib/node_modules]
+            apply_to: "\.less$"
+        cssrewrite: ~

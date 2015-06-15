@@ -20,12 +20,29 @@
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
         "jms/serializer-bundle": "^0.13.0",
-        "knplabs/knp-paginator-bundle": "^2.4"
+        "knplabs/knp-paginator-bundle": "^2.4",
+        "braincrafted/bootstrap-bundle": "~2.0",
+        "twbs/bootstrap": "^3.3",
+        "jquery/jquery":  "1.11.*",
+        "knplabs/knp-menu-bundle": "^2.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
         "phpunit/phpunit": "4.6.*"
     },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "jquery/jquery",
+                "version": "1.11.1",
+                "dist": {
+                    "url": "http://code.jquery.com/jquery-1.11.1.js",
+                    "type": "file"
+                }
+            }
+        }
+    ],
     "scripts": {
         "post-root-package-install": [
             "SymfonyStandard\\Composer::hookRootPackageInstall"
