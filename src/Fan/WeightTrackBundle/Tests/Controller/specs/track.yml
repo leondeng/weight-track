@@ -132,4 +132,27 @@ controller_actions:
           0.date: '2015-06-14T00:00:00+1000'
           9.weight: 125
           9.date: '2015-06-05T00:00:00+1000'
-          
+    -
+      test_id: track_list/1
+      method: GET
+      uri: /user/{id}/tracks/{page}
+      parameters:
+        id: 1
+        page: 2
+      checks:
+        content_decoded:
+          0.weight: 130
+          0.date: '2015-06-04T00:00:00+1000'
+          1.weight: 132
+          1.date: '2015-06-03T00:00:00+1000'
+    -
+      test_id: track_list/2
+      method: GET
+      uri: /user/{id}/tracks/{page}
+      parameters:
+        id: 1
+        page: 5
+      checks:
+        status_code: 404
+        content_decoded:
+          message: Tracks not found!

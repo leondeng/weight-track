@@ -10,6 +10,8 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 class TrackFixture extends AbstractFixture implements DependentFixtureInterface
 {
   const TRACKS = [
+    '2015-06-03' => 132,
+    '2015-06-04' => 130,
     '2015-06-05' => 125,
     '2015-06-06' => 126,
     '2015-06-07' => 125,

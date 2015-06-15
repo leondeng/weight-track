@@ -81,8 +81,25 @@ class WebServiceController extends Controller implements TransactionWrapControll
     try {
       $em = $this->getDoctrine()->getManager();
       if ($user = $em->getRepository('Fan\WeightTrackBundle\Entity\User')->find($request->query->get('id'))) {
-        $tracks = $user->getTracks();
-        return $this->responseJson($this->serialize($tracks));
+        $qb = $em->createQueryBuilder();
+        $qb->select('t.id, t.weight, t.date')
+          ->from('Fan\WeightTrackBundle\Entity\Track', 't')
+          ->where($qb->expr()->eq('t.user', '?1'))
+          ->setParameter(1, $user)
+          ->orderBy('t.date', 'DESC');
+        
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $qb->getQuery(),
+            $request->query->getInt('page', 1), //page number
+            10 //limit per page
+        );
+        $tracks = $pagination->getItems();
+        if (count($tracks) > 0) {
+          return $this->responseJson($this->serialize($tracks));
+        } else {
+          return $this->err404('Tracks not found!');
+        }
       } else {
         return $this->err404('User not found!');
      }
