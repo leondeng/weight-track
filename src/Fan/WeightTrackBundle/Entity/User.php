@@ -27,6 +27,11 @@ class User
   private $id;
 
   /**
+   * @ORM\OneToOne(targetEntity="Goal", mappedBy="user")
+   */
+  private $goal;
+
+  /**
    * @ORM\OneToMany(targetEntity="Track", mappedBy="user", cascade={"persist"})
    * @ORM\OrderBy({"date" = "DESC"})
    */

@@ -37,3 +37,14 @@ controller_actions:
         content_decoded:
           error_code: 901
           message: Invalid goal!
+    -
+      test_id: goal_create/3
+      method: POST
+      uri: /user/{id}/goal
+      parameters:
+        id: 1
+      content:
+        goal: 125
+      checks:
+        content_decoded:
+          goal: 125

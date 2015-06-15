@@ -38,7 +38,7 @@ class Goal
   private $goal;
 
     /**
-   * @ORM\OneToOne(targetEntity="User")
+   * @ORM\OneToOne(targetEntity="User", inversedBy="goal")
    */
   private $user;
 }

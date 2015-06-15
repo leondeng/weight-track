@@ -29,7 +29,9 @@ class WebServiceController extends Controller implements TransactionWrapControll
       $em = $this->getDoctrine()->getManager();
       if ($user = $em->getRepository('Fan\WeightTrackBundle\Entity\User')->find($request->request->get('id'))) {
         $data = json_decode($request->getContent(), true);
-        $goal = new Goal();
+        if (!$goal = $user->getGoal()) { // update goal when existing
+          $goal = new Goal();
+        }
         $goal->setGoal($data['goal']);
         $goal->setUser($user);
 
