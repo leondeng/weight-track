@@ -30,18 +30,18 @@ list_tracks:
 
 homepage:
    path: /user/{id}
-   defaults: { _controller: FanWeightTrackBundle:FrontEnd:viewTrend, id: 1 }
+   defaults: { _controller: FanWeightTrackBundle:FrontEnd:viewTrend }
    requirements:
         _method:  GET
 
 set_goal:
    path: /user/{id}/set_goal
-   defaults: { _controller: FanWeightTrackBundle:FrontEnd:setGoal, id: 1 }
+   defaults: { _controller: FanWeightTrackBundle:FrontEnd:setGoal }
    requirements:
         _method:  GET
 
 weight_history:
    path: /user/{id}/history
-   defaults: { _controller: FanWeightTrackBundle:FrontEnd:weightHistory, id: 1 }
+   defaults: { _controller: FanWeightTrackBundle:FrontEnd:weightHistory }
    requirements:
         _method:  GET

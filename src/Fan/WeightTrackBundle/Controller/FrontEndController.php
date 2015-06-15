@@ -17,12 +17,11 @@ class FrontEndController extends Controller
   {
     $em = $this->getDoctrine()->getManager();
     if ($user = $em->getRepository('Fan\WeightTrackBundle\Entity\User')->find($id)) {
-      $goal = $user->getGoal();
-      $form = $this->createFormBuilder($goal)
+      $form = $this->createFormBuilder()
         ->add('goal', 'text')
-        ->add('save', 'submit', array('label' => 'Create Goal'))
+        ->add('save', 'submit', array('label' => 'Set Goal!'))
         ->getForm();
-      
+
       return $this->render('FanWeightTrackBundle:FrontEnd:setGoal.html.twig', array(
         'form' => $form->createView(),
       ));

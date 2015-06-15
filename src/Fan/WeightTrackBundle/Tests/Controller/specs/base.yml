@@ -1,4 +1,5 @@
 controller_actions:
+  base_url: http://wtrack.localhost/app_test.php
   logging:
     file: php://stderr
     verbosity: 0

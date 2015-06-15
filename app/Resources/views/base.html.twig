@@ -7,10 +7,18 @@
           <!-- Bootstrap -->
           <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">
         {% endblock %}
+
+        {% stylesheets filter='less' output='css/compiled-main.css'
+          '@FanWeightTrackBundle/Resources/public/less/*'
+        %}
+          <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="all" />
+        {% endstylesheets %}
+
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <!-- HTML5 Shim and Respond.js add IE8 support of HTML5 elements and media queries -->
         
         {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
+        <script src="{{ asset('js/jquery.js') }}"></script>
     </head>
     <body>
         {% block body %}{% endblock %}

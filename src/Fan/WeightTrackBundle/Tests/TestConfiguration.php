@@ -111,7 +111,11 @@ class TestConfiguration implements ConfigurationInterface
    * system settings
    */
   public function getConfigSchemaForSystemSettings(NodeBuilder $node) {
-    $node = $node->scalarNode('test_filter')
+    $node = $node
+      ->scalarNode('base_url')
+        ->defaultValue('http://wtrack.localhost/app_test.php')
+      ->end()
+      ->scalarNode('test_filter')
       ->end()
       ->scalarNode('test_regex')
       ->end();

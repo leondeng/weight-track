@@ -24,10 +24,10 @@ class WebServiceController extends Controller implements TransactionWrapControll
     $this->getDoctrine()->getManager()->flush();
   }
 
-  public function createGoalAction(Request $request) {
+  public function createGoalAction($id, Request $request) {
     try {
       $em = $this->getDoctrine()->getManager();
-      if ($user = $em->getRepository('Fan\WeightTrackBundle\Entity\User')->find($request->request->get('id'))) {
+      if ($user = $em->getRepository('Fan\WeightTrackBundle\Entity\User')->find($request->request->get('id', $id))) {
         $data = json_decode($request->getContent(), true);
         if (!$goal = $user->getGoal()) { // update goal when existing
           $goal = new Goal();
@@ -52,10 +52,10 @@ class WebServiceController extends Controller implements TransactionWrapControll
     }
   }
 
-  public function createTrackAction(Request $request) {
+  public function createTrackAction($id, Request $request) {
   try {
       $em = $this->getDoctrine()->getManager();
-      if ($user = $em->getRepository('Fan\WeightTrackBundle\Entity\User')->find($request->request->get('id'))) {
+      if ($user = $em->getRepository('Fan\WeightTrackBundle\Entity\User')->find($request->request->get('id', $id))) {
         $data = json_decode($request->getContent(), true);
         $track = new Track();
         $track->setWeight($data['weight']);
@@ -79,17 +79,17 @@ class WebServiceController extends Controller implements TransactionWrapControll
     }
   }
 
-  public function listTracksAction(Request $request) {
+  public function listTracksAction($id, Request $request) {
     try {
       $em = $this->getDoctrine()->getManager();
-      if ($user = $em->getRepository('Fan\WeightTrackBundle\Entity\User')->find($request->query->get('id'))) {
+      if ($user = $em->getRepository('Fan\WeightTrackBundle\Entity\User')->find($request->query->get('id', $id))) {
         $qb = $em->createQueryBuilder();
         $qb->select('t.id, t.weight, t.date')
           ->from('Fan\WeightTrackBundle\Entity\Track', 't')
           ->where($qb->expr()->eq('t.user', '?1'))
           ->setParameter(1, $user)
           ->orderBy('t.date', 'DESC');
-        
+
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $qb->getQuery(),
@@ -110,9 +110,9 @@ class WebServiceController extends Controller implements TransactionWrapControll
     }
   }
 
-  public function updateTrackAction(Request $request) {
+  public function updateTrackAction($id, Request $request) {
     try {
-      $userId = $request->request->get('id');
+      $userId = $request->request->get('id', $id);
       $date = date_create(date('Y-m-d', $request->request->get('date')));
 
       $data = json_decode($request->getContent(), true);
@@ -139,9 +139,9 @@ class WebServiceController extends Controller implements TransactionWrapControll
     }
   }
 
-  public function deleteTrackAction(Request $request) {
+  public function deleteTrackAction($id, Request $request) {
     try {
-      $userId = $request->request->get('id');
+      $userId = $request->request->get('id', $id);
       $date = date_create(date('Y-m-d', $request->request->get('date')));
 
       $em = $this->getDoctrine()->getManager();

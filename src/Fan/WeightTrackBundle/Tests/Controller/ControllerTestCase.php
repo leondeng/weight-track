@@ -144,6 +144,7 @@ abstract class ControllerTestCase extends WebTestCase
     $content = json_encode($content);
     $this->log(sprintf('Sending request data "%s"', $content), 2);
 
+    $url = sprintf('%s%s', $this->getConfig('base_url'), $uri); //FIXME: prepend app_test.php not working
     $crawler = $client->request($method, $uri, $parameters, $files, $server, $content);
 
     $response = $client->getResponse();
