@@ -9,7 +9,9 @@ use Symfony\Component\Validator\Validation;
 /**
  * Track
  *
- * @ORM\Table(name="wt_track")
+ * @ORM\Table(name="wt_track", uniqueConstraints={
+ *   @ORM\UniqueConstraint(name="wt_track_user_date_idx", columns={"user_id", "date"})
+ * })
  * @ORM\Entity
  */
 class Track

@@ -9,11 +9,11 @@ controller_actions:
         id: 1
       content: 
         weight: 120
-        date: '2015-06-14T00:00:00.000Z'
+        date: '2015-06-15T00:00:00.000Z'
       checks:
         content_decoded:
           weight: 120
-          date: '2015-06-14T00:00:00+0000'
+          date: '2015-06-15T00:00:00+0000'
     -
       test_id: track_create/1
       method: POST
@@ -42,6 +42,17 @@ controller_actions:
         content_decoded:
           error_code: 902
           message: Invalid date!
+    -
+      test_id: track_create/3
+      method: POST
+      uri: /user/{id}/track
+      parameters:
+        id: 1
+      content:
+        weight: 120
+        date: '2015-06-14T00:00:00.000Z'
+      checks:
+        status_code: 500
 
 # track update
     -
