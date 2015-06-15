@@ -16,9 +16,6 @@ use Symfony\Component\Validator\Validation;
  */
 class Track
 {
-
-  use \Fan\WeightTrackBundle\Traits\Accessor;
-
   /**
    *
    * @var integer
@@ -53,4 +50,35 @@ class Track
    * @ORM\ManyToOne(targetEntity="User", inversedBy="tracks")
    */
   private $user;
+  
+  public function getId() {
+    return $this->id;
+  }
+  
+  public function setWeight($weight) {
+    $this->weight = $weight;
+    return $this;
+  }
+  
+  public function getWeight() {
+    return $this->weight;
+  }
+  
+  public function setDate($date) {
+    $this->date = $date;
+    return $this;
+  }
+  
+  public function getDate() {
+    return $this->date;
+  }
+  
+  public function setUser(User $user) {
+    $this->user = $user;
+    return $this;
+  }
+  
+  public function getUser() {
+    return $this->user;
+  }
 }

@@ -14,9 +14,6 @@ use Symfony\Component\Validator\Validation;
  */
 class Goal
 {
-
-  use \Fan\WeightTrackBundle\Traits\Accessor;
-
   /**
    *
    * @var integer
@@ -41,4 +38,26 @@ class Goal
    * @ORM\OneToOne(targetEntity="User", inversedBy="goal")
    */
   private $user;
+  
+  public function getId() {
+    return $this->id;
+  }
+  
+  public function setGoal($goal) {
+    $this->goal = $goal;
+    return $this;
+  }
+  
+  public function getGoal() {
+    return $this->goal;
+  }
+  
+  public function setUser(User $user) {
+    $this->user = $user;
+    return $this;
+  }
+  
+  public function getUser() {
+    return $this->user;
+  }
 }

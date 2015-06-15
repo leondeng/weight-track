@@ -27,3 +27,21 @@ list_tracks:
     defaults: { _controller: FanWeightTrackBundle:WebService:listTracks, page: 1 }
     requirements:
         _method:  GET
+
+homepage:
+   path: /user/{id}
+   defaults: { _controller: FanWeightTrackBundle:FrontEnd:viewTrend, id: 1 }
+   requirements:
+        _method:  GET
+
+set_goal:
+   path: /user/{id}/set_goal
+   defaults: { _controller: FanWeightTrackBundle:FrontEnd:setGoal, id: 1 }
+   requirements:
+        _method:  GET
+
+weight_history:
+   path: /user/{id}/history
+   defaults: { _controller: FanWeightTrackBundle:FrontEnd:weightHistory, id: 1 }
+   requirements:
+        _method:  GET

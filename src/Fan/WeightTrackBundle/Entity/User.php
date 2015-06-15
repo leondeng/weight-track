@@ -15,9 +15,6 @@ use Doctrine\Common\Collections\Doctrine\Common\Collections;
  */
 class User
 {
-
-  use \Fan\WeightTrackBundle\Traits\Accessor;
-
   /**
    *
    * @var integer @ORM\Column(name="id", type="integer")
@@ -37,6 +34,19 @@ class User
    */
   private $tracks;
 
+  public function getId() {
+    return $this->id;
+  }
+  
+  public function setGoal(Goal $goal) {
+    $this->goal = $goal;
+    return $this;
+  }
+  
+  public function getGoal() {
+    return $this->goal;
+  }
+  
   public function __construct() {
     $this->tracks = new ArrayCollection();
   }

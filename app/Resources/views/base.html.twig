@@ -3,8 +3,14 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+          <!-- Bootstrap -->
+          <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <!-- HTML5 Shim and Respond.js add IE8 support of HTML5 elements and media queries -->
+        
+        {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
     </head>
     <body>
         {% block body %}{% endblock %}
