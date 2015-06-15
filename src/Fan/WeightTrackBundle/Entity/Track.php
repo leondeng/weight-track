@@ -28,7 +28,7 @@ class Track
 
   /**
    * @var integer
-   * @ORM\Column(name="weight", type="integer")
+   * @ORM\Column(name="weight", type="decimal", precision=5, scale=2)
    * @Assert\Type(
    *   type="numeric",
    *   message="Invalid weight!"
