@@ -1,0 +1,38 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}HomePage{% endblock %}
+
+{% block body %}
+  <ul id="wtTab" class="nav nav-tabs">
+    <li role="presentation" class="active">
+      <a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Home</a>
+    </li>
+    <li role="presentation" class>
+      <a href="#goal" id="goal-tab" role="tab" data-toggle="tab" aria-controls="goal" aria-expanded="true">Goal</a>
+    </li>
+    <li role="presentation" class>
+      <a href="#history" id="history-tab" role="tab" data-toggle="tab" aria-controls="history" aria-expanded="true">History</a>
+    </li>
+  </ul>
+  
+  <div id="wtTabContent" class="tab-content">
+    <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
+      <p>haha</P>
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="goal" aria-labelledby="goal-tab">
+      {% include 'FanWeightTrackBundle:FrontEnd:goal.html.twig' %}
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="history" aria-labelledby="history-tab">
+      <p>hehe</p>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+    {% javascripts output="js/wt_main.js"
+      '@FanWeightTrackBundle/Resources/public/js/*'
+    %}
+      <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
