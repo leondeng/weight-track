@@ -19,12 +19,13 @@
     
     $('table#history_table').on('click', '.rowDelButton', function (e) {
       e.preventDefault();
+      $this = $(this);
       if (confirm('Are you sure you want to delete this item?')) {
         $.ajax({
           url: $(this).attr('url'),
           type: 'DELETE',
           success: function(result) {
-            $(this).closest('tr').remove();
+            $this.closest('tr').remove();
           },
           error: function(xhr) {
             $('div#history').append('<div class="alert alert-danger alert-dismissible fade in" role="alert">\
@@ -46,9 +47,10 @@
     reloadHistory = function() {
       $.ajax({
         type: "GET",
-        url: '/app_dev.php/user/' + wt_userId + '/tracks',
+        url: baseUrl + 'user/' + wt_userId + '/tracks',
         success: function(msg) {
           //console.log(msg);
+          $('table#history_table tbody tr').remove();
           $.each(msg, function ( index, obj) {
             var date = new Date(obj.date);
             var day = date.getDate();
@@ -57,7 +59,7 @@
             var year = date.getFullYear();
             var dateString = day + '/' + monthIndex + '/' + year;
             
-            var action_url = '/app_dev.php/user/' + wt_userId + '/track/' + year + '-' + monthIndex + '-' + day;
+            var action_url = baseUrl + 'user/' + wt_userId + '/track/' + year + '-' + monthIndex + '-' + day;
             var del = '<button type="button" class="btn btn-default btn-sm rowDelButton" url="'+action_url+'">Delete</button>';
             var edit = '<button type="button" class="btn btn-default btn-sm rowEditButton" url="'+action_url+'">Edit</button>';
             
@@ -86,7 +88,7 @@
       if (goalVal) {
         $.ajax({
           type: "POST",
-          url: '/app_dev.php/user/' + wt_userId + '/goal',
+          url: baseUrl + 'user/' + wt_userId + '/goal',
           data: JSON.stringify({ goal: goalVal }),
           success: function(msg) {
             $('form').prepend('<div class="alert alert-success alert-dismissible fade in" role="alert">\

@@ -67,8 +67,8 @@ braincrafted_bootstrap:
 assetic:
     filters:
         less:
-#            node: /usr/local/bin/node
-            node: /usr/bin/node
+            node: /usr/local/bin/node
+#            node: /usr/bin/node
             node_paths: [/usr/local/lib/node_modules]
             apply_to: "\.less$"
         cssrewrite: ~
