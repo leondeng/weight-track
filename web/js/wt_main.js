@@ -8,10 +8,11 @@
     $("form#form_goal button").click(function (e) {
       e.preventDefault();
       var goalVal = $('form input#goal')[0].value;
+      var userId = $('form input#user')[0].value;
       if (goalVal) {
         $.ajax({
           type: "POST",
-          url: '/app_dev.php/user/1/goal',
+          url: '/app_dev.php/user/' + userId + '/goal',
           data: JSON.stringify({ goal: goalVal }),
           success: function(msg) {
             $('form').prepend('<div class="alert alert-success alert-dismissible fade in" role="alert">\

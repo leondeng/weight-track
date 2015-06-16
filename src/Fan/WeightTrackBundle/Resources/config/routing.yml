@@ -29,7 +29,7 @@ list_tracks:
         _method:  GET
 
 homepage:
-   path: /user/{id}
+   path: /
    defaults: { _controller: FanWeightTrackBundle:FrontEnd:index }
    requirements:
         _method:  GET

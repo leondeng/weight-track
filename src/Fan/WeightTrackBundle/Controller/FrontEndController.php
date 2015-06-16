@@ -6,14 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class FrontEndController extends Controller
 {
-  public function indexAction($id)
-  {$em = $this->getDoctrine()->getManager();
-    if ($user = $em->getRepository('Fan\WeightTrackBundle\Entity\User')->find($id)) {
-      return $this->render('FanWeightTrackBundle:FrontEnd:index.html.twig', array(
-        // ...
-      ));
-    } else {
-      throw $this->createNotFoundException('The user does not exist');
-    }
+  public function indexAction() {
+    $em = $this->getDoctrine()->getManager();
+    $user = $em->getRepository('Fan\WeightTrackBundle\Entity\User')->find(1); // hardcode user
+    return $this->render('FanWeightTrackBundle:FrontEnd:index.html.twig', array(
+      'user' => $user
+    ));
   }
 }

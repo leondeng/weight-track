@@ -17,13 +17,13 @@
   
   <div id="wtTabContent" class="tab-content">
     <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
-      <p>haha</P>
+      {{ include('FanWeightTrackBundle:FrontEnd:trend.html.twig', { 'user': user }) }}
     </div>
     <div role="tabpanel" class="tab-pane fade" id="goal" aria-labelledby="goal-tab">
-      {% include 'FanWeightTrackBundle:FrontEnd:goal.html.twig' %}
+      {{ include('FanWeightTrackBundle:FrontEnd:goal.html.twig', { 'user': user }) }}
     </div>
     <div role="tabpanel" class="tab-pane fade" id="history" aria-labelledby="history-tab">
-      <p>hehe</p>
+      {{ include('FanWeightTrackBundle:FrontEnd:history.html.twig', { 'user': user }) }}
     </div>
   </div>
 {% endblock %}

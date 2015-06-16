@@ -1,7 +1,8 @@
 <form class="form-inline" id="form_goal">
   <div class="form-group">
-    <label for="exampleInputName2">Goal</label>
+    <label for="goal">Goal</label>
     <input type="text" class="form-control" id="goal" placeholder="Set Your Goal Here">
+    <input type="hidden"  class="form-control" id="user" value="{{ user.id }}"></input>
   </div>
   <button type="submit" class="btn btn-default">Set</button>
 </form>
