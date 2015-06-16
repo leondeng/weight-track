@@ -90,13 +90,14 @@ knp_paginator:
         pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig     # bootstrap v3 pagination controls template
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
 
-braincrafted_bootstrap:
-    less_filter: less
-
-assetic:
-    filters:
-        less:
-            node: /usr/bin/node
-            node_paths: [/usr/local/lib/node_modules]
-            apply_to: "\.less$"
-        cssrewrite: ~
+#braincrafted_bootstrap:
+#    less_filter: less
+#
+#assetic:
+#    filters:
+#        less:
+#            node: /usr/bin/node
+#            node_paths: [/usr/local/lib/node_modules]
+#            apply_to: "\.less$"
+#        cssrewrite: ~
+#    bundles: [FanWeightTrackBundle]
