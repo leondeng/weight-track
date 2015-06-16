@@ -110,10 +110,10 @@ class WebServiceController extends Controller implements TransactionWrapControll
     }
   }
 
-  public function updateTrackAction($id, Request $request) {
+  public function updateTrackAction($id, $date, Request $request) {
     try {
       $userId = $request->request->get('id', $id);
-      $date = date_create(date('Y-m-d', $request->request->get('date')));
+      $date = date_create($request->request->get('date', $date));
 
       $data = json_decode($request->getContent(), true);
 
@@ -139,10 +139,10 @@ class WebServiceController extends Controller implements TransactionWrapControll
     }
   }
 
-  public function deleteTrackAction($id, Request $request) {
+  public function deleteTrackAction($id, $date, Request $request) {
     try {
       $userId = $request->request->get('id', $id);
-      $date = date_create(date('Y-m-d', $request->request->get('date')));
+      $date = date_create($request->request->get('date', $date));
 
       $em = $this->getDoctrine()->getManager();
       if ($track = $em->getRepository('Fan\WeightTrackBundle\Entity\Track')->findOneBy(array('user' => $userId, 'date' => $date))) {

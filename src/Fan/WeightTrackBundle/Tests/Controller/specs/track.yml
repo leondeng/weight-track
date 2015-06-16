@@ -61,7 +61,7 @@ controller_actions:
       uri: /user/{id}/track/{date}
       parameters:
         id: 1
-        date: 2015-06-05
+        date: '2015-06-05'
       content:
         weight: 130
       checks:
@@ -74,7 +74,7 @@ controller_actions:
       uri: /user/{id}/track/{date}
       parameters:
         id: 1
-        date: 2015-06-05
+        date: '2015-06-05'
       content:
         weight: invalid
       checks:
@@ -88,7 +88,7 @@ controller_actions:
       uri: /user/{id}/track/{date}
       parameters:
         id: 1
-        date: 2015-01-01
+        date: '2015-01-01'
       content:
         weight: 150
       checks:
@@ -101,7 +101,7 @@ controller_actions:
       uri: /user/{id}/track/{date}
       parameters:
         id: 1
-        date: 2015-12-01
+        date: '2015-12-01'
       content:
         weight: 150
       checks:
@@ -115,7 +115,7 @@ controller_actions:
       uri: /user/{id}/track/{date}
       parameters:
         id: 1
-        date: 2015-06-05
+        date: '2015-06-05'
       checks:
         content_decoded:
           status: ok
@@ -125,7 +125,7 @@ controller_actions:
       uri: /user/{id}/track/{date}
       parameters:
         id: 1
-        date: 2015-01-01
+        date: '2015-01-01'
       checks:
         status_code: 404
         content_decoded:

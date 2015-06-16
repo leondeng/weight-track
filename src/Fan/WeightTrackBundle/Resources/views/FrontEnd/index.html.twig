@@ -17,13 +17,13 @@
   
   <div id="wtTabContent" class="tab-content">
     <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
-      {{ include('FanWeightTrackBundle:FrontEnd:trend.html.twig', { 'user': user }) }}
+      {{ include('FanWeightTrackBundle:FrontEnd:trend.html.twig') }}
     </div>
     <div role="tabpanel" class="tab-pane fade" id="goal" aria-labelledby="goal-tab">
-      {{ include('FanWeightTrackBundle:FrontEnd:goal.html.twig', { 'user': user }) }}
+      {{ include('FanWeightTrackBundle:FrontEnd:goal.html.twig') }}
     </div>
     <div role="tabpanel" class="tab-pane fade" id="history" aria-labelledby="history-tab">
-      {{ include('FanWeightTrackBundle:FrontEnd:history.html.twig', { 'user': user }) }}
+      {{ include('FanWeightTrackBundle:FrontEnd:history.html.twig') }}
     </div>
   </div>
 {% endblock %}
@@ -33,6 +33,9 @@
       '@FanWeightTrackBundle/Resources/public/js/*'
     %}
       <script src="{{ asset_url }}"></script>
+      <script>
+        var wt_userId = {{ user.id }};
+      </script>
     {% endjavascripts %}
 {% endblock %}
 
