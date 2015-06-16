@@ -98,7 +98,8 @@ class WebServiceController extends Controller implements TransactionWrapControll
         );
         $tracks = $pagination->getItems();
         if (count($tracks) > 0) {
-          return $this->responseJson($this->serialize($tracks));
+          return $this->responseJson(sprintf('{"tracks":%s,"pagination":{"count":%d,"current":%d}}',
+              $this->serialize($tracks), $pagination->getPageCOunt(), $pagination->getCurrentPageNumber()));
         } else {
           return $this->err404('Tracks not found!');
         }
