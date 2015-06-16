@@ -10,3 +10,75 @@
   <tbody>
   </tbody>
 </table>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newTrackModal">
+  New Track
+</button>
+
+<div class="modal fade" id="newTrackModal" tabindex="-1" role="dialog" aria-labelledby="newTrackModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="newTrackModalLabel">New Track</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-inline" id="form_new_track">
+          <div class="form-group">
+            <label for="weight">Weight</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="weight" placeholder="Input Weight Here" />
+              <div class="input-group-addon">KG</div>
+            </div>
+            <label for="date">Date</label>
+            <input type="text" class="form-control" id="date" placeholder="Input Date Here" />
+            <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+            <script type="text/javascript">
+              $(function () {
+                $('#date').datepicker({ dateFormat: 'dd/mm/yy' });
+              });
+            </script>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="newTrackButton">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editTrackModal" tabindex="-1" role="dialog" aria-labelledby="editTrackModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="editTrackModalLabel">Edit Track</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-inline" id="form_edit_track">
+          <div class="form-group">
+            <label for="newWeight">Weight</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="newWeight" />
+              <div class="input-group-addon">KG</div>
+            </div>
+            <label for="newDate">Date</label>
+            <input type="text" class="form-control" id="newDate" />
+            <!--<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>-->
+            <script type="text/javascript">
+              $(function () {
+                $('#newDate').datepicker({ dateFormat: 'dd/mm/yy' });
+              });
+            </script>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="editTrackButton">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
