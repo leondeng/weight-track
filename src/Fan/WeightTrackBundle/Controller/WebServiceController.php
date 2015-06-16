@@ -79,8 +79,9 @@ class WebServiceController extends Controller implements TransactionWrapControll
     }
   }
 
-  public function listTracksAction($id, Request $request) {
+  public function listTracksAction($id, $page, Request $request) {
     try {
+      if (!$page) $page = 1;
       $em = $this->getDoctrine()->getManager();
       if ($user = $em->getRepository('Fan\WeightTrackBundle\Entity\User')->find($request->query->get('id', $id))) {
         $qb = $em->createQueryBuilder();
@@ -93,7 +94,7 @@ class WebServiceController extends Controller implements TransactionWrapControll
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $qb->getQuery(),
-            $request->query->getInt('page', 1), //page number
+            $request->query->getInt('page', $page), //page number
             10 //limit per page
         );
         $tracks = $pagination->getItems();

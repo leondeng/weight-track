@@ -47,14 +47,22 @@
       $('input#newDate').val(dateVal);
     })
     
-    reloadHistory = function() {
+    reloadHistory = function(page) {
+      url = baseUrl + 'user/' + wt_userId + '/tracks';
+      if (typeof page !== 'undefined') {
+        url += '/' + page;
+      }
+      
       $.ajax({
         type: "GET",
-        url: baseUrl + 'user/' + wt_userId + '/tracks',
+        url: url,
         success: function(msg) {
           //console.log(msg);
+
+          var tracks = msg.tracks; 
           $('table#history_table tbody tr').remove();
-          $.each(msg, function ( index, obj) {
+          
+          $.each(tracks, function ( index, obj) {
             var date = new Date(obj.date);
             var day = date.getDate();
             var monthIndex = date.getMonth() + 1;
@@ -74,6 +82,40 @@
               </tr>\
             ').appendTo($('table#history_table tbody'));
           });
+          
+          $('ul.pagination li').remove();
+          var pageCnt = msg.pagination.count;
+          var curPage = msg.pagination.current;
+          
+          var $pre = $('<li>\
+            <a href="#" aria-label="Previous">\
+              <span aria-hidden="true">&laquo;</span>\
+            </a>\
+          </li>\
+          ');
+          if (curPage == 1) {
+            $pre.addClass('disabled');
+          }
+          $pre.appendTo($('ul.pagination'));
+          
+          for (i=1; i<=pageCnt; i++) {
+            $pg = $('<li><a href="#">'+i+'</a></li>');
+            if (curPage == i) {
+              $pg.addClass('active');
+            }
+            $pg.appendTo($('ul.pagination'));
+          }
+          
+          var $next = $('<li>\
+            <a href="#" aria-label="Next">\
+              <span aria-hidden="true">&raquo;</span>\
+            </a>\
+          </li>\
+          ');
+          if (curPage == pageCnt) {
+            $next.addClass('disabled');
+          }
+          $next.appendTo($('ul.pagination'));
         },
         error: function(xhr) {
           $('div#history').prepend('<div class="alert alert-danger alert-dismissible fade in" role="alert">\
@@ -182,6 +224,11 @@
         
           $('#editTrackModal').modal('hide');
       }
+    });
+    
+    $('.pagination').on('click', 'a', function (e) {
+      e.preventDefault();
+      reloadHistory($(this).html());
     });
   });
 })(jQuery);
