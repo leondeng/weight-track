@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/leondeng/weight-track.png?label=ready&title=Ready)](https://waffle.io/leondeng/weight-track)
 <div>
 <a href="https://travis-ci.org/leondeng/weight-track">
 <img title="Build Status Images" src="https://travis-ci.org/leondeng/weight-track.svg">
