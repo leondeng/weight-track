@@ -47,11 +47,8 @@
       $('input#newDate').val(dateVal);
     })
     
-    reloadHistory = function(page) {
-      url = baseUrl + 'user/' + wt_userId + '/tracks';
-      if (typeof page !== 'undefined') {
-        url += '/' + page;
-      }
+    reloadHistory = function() {
+      url = baseUrl + 'user/' + wt_userId + '/tracks/' + curPage;
       
       $.ajax({
         type: "GET",
@@ -85,7 +82,7 @@
           
           $('ul.pagination li').remove();
           var pageCnt = msg.pagination.count;
-          var curPage = msg.pagination.current;
+          //var curPage = msg.pagination.current;
           
           var $pre = $('<li>\
             <a href="#" aria-label="Previous">\
@@ -228,7 +225,8 @@
     
     $('.pagination').on('click', 'a', function (e) {
       e.preventDefault();
-      reloadHistory($(this).html());
+      curPage = $(this).html();
+      reloadHistory();
     });
   });
 })(jQuery);
