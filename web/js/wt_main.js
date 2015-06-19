@@ -27,16 +27,27 @@
             $this.closest('tr').remove();
           },
           error: function(xhr) {
-            $('div#history').append('<div class="alert alert-danger alert-dismissible fade in" role="alert">\
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>\
-              <p>Delete track failed due to: </p>\
-              <p>' + xhr.responseJSON.message +'</p>\
-              </div>\
-            ');
+            flash_err('div#history', 'Delete track failed!');
           }
         });
       }
     });
+    
+    flash_success = function (container, msg) {
+      $(container).append('<div class="alert alert-success alert-dismissible fade in" role="alert">\
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>\
+        <p>' + msg + '</p>\
+        </div>\
+      ');
+    };
+      
+    flash_err = function (container, msg) {
+      $(container).append('<div class="alert alert-danger alert-dismissible fade in" role="alert">\
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>\
+        <p>' + msg + '</p>\
+        </div>\
+      ');
+    };
     
     $('#editTrackModal').on('show.bs.modal', function (e) {
       //console.log(e.relatedTarget);
@@ -47,7 +58,7 @@
       $('input#newDate').val(dateVal);
     })
     
-    reloadHistory = function() {
+    reloadHistory = function () {
       url = baseUrl + 'user/' + wt_userId + '/tracks/' + curPage;
       
       $.ajax({
@@ -115,12 +126,7 @@
           $next.appendTo($('ul.pagination'));
         },
         error: function(xhr) {
-          $('div#history').prepend('<div class="alert alert-danger alert-dismissible fade in" role="alert">\
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>\
-              <p>History load failed due to: </p>\
-              <p>' + xhr.responseJSON.message +'</p>\
-              </div>\
-          ');
+          flash_err('div#history', 'History reload failed!');
         }
       });
     }
@@ -134,20 +140,10 @@
           url: baseUrl + 'user/' + wt_userId + '/goal',
           data: JSON.stringify({ goal: goalVal }),
           success: function(msg) {
-            $('form').prepend('<div class="alert alert-success alert-dismissible fade in" role="alert">\
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>\
-                <p>Goal ' + msg.goal + ' set successfully !</p>\
-                </div>\
-            ');
+            flash_success('form#form_goal', 'Goal ' + msg.goal + ' set successfully!');
           },
           error: function(xhr) {
-            $('form').prepend('<div class="alert alert-danger alert-dismissible fade in" role="alert">\
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>\
-                <p>Goal set failed due to: </p>\
-                <p>' + xhr.responseJSON.message +'</p>\
-                <p>Please try again.</p>\
-                </div>\
-            ');
+            flash_err('form#form_goal', 'Goal set failed!');
           }
         });
       }
@@ -168,19 +164,11 @@
             url: baseUrl + 'user/' + wt_userId + '/track',
             data: JSON.stringify({ weight: weightVal, date: date }),
             success: function(msg) {
-              $('div#history').prepend('<div class="alert alert-success alert-dismissible fade in" role="alert">\
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>\
-                <p>'+ dateVal +' weight ' + msg.weight + ' KG tracked successfully !</p>\
-                </div>\
-              ');
+              flash_success('div#history', dateVal +' weight ' + msg.weight + ' KG tracked successfully!');
               reloadHistory();
             },
             error: function(xhr) {
-              $('div#history').prepend('<div class="alert alert-danger alert-dismissible fade in" role="alert">\
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>\
-                  <p>Track create failed, please try again.</p>\
-                  </div>\
-              ');
+              flash_err('div#history', 'Track create failed, please try again.');
             }
           });
         
@@ -203,19 +191,11 @@
             url: baseUrl + 'user/' + wt_userId + '/track/' + date,
             data: JSON.stringify({ weight: weightVal }),
             success: function(msg) {
-              $('div#history').prepend('<div class="alert alert-success alert-dismissible fade in" role="alert">\
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>\
-                <p>'+ dateVal +' weight updated to' + msg.weight + ' KG successfully !</p>\
-                </div>\
-              ');
+              flash_success('div#history', dateVal +' weight updated to' + msg.weight + ' KG successfully!');
               reloadHistory();
             },
             error: function(xhr) {
-              $('div#history').prepend('<div class="alert alert-danger alert-dismissible fade in" role="alert">\
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>\
-                  <p>Track update failed, please try again.</p>\
-                  </div>\
-              ');
+              flash_err('div#history', 'Track update failed, please try again.');
             }
           });
         
