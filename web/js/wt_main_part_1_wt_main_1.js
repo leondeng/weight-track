@@ -13,10 +13,10 @@
         default:
           break;
       }
-      
+
       $(this).tab('show');
     });
-    
+
     $('table#history_table').on('click', '.rowDelButton', function (e) {
       $this = $(this);
       if (confirm('Are you sure you want to delete this item?')) {
@@ -32,7 +32,7 @@
         });
       }
     });
-    
+
     flash_success = function (container, msg) {
       $(container).append('<div class="alert alert-success alert-dismissible fade in" role="alert">\
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>\
@@ -40,7 +40,7 @@
         </div>\
       ');
     };
-      
+
     flash_err = function (container, msg) {
       $(container).append('<div class="alert alert-danger alert-dismissible fade in" role="alert">\
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>\
@@ -48,16 +48,15 @@
         </div>\
       ');
     };
-    
+
     $('#editTrackModal').on('show.bs.modal', function (e) {
-      //console.log(e.relatedTarget);
       $btn = $(e.relatedTarget);
       var weightVal = $btn.closest('tr').children().eq(1).html();
       var dateVal = $btn.closest('tr').children().eq(0).html();
       $('input#newWeight').val(weightVal);
       $('input#newDate').val(dateVal);
     })
-    
+
     reloadHistory = function () {
       url = baseUrl + 'user/' + wt_userId + '/tracks/' + curPage;
       
@@ -65,12 +64,8 @@
         type: "GET",
         url: url,
         success: function(msg) {
-          //console.log(msg);
-
-          var tracks = msg.tracks; 
           $('table#history_table tbody tr').remove();
-          
-          $.each(tracks, function ( index, obj) {
+          $.each(msg.tracks, function ( index, obj) {
             var date = new Date(obj.date);
             var day = date.getDate();
             var monthIndex = date.getMonth() + 1;
@@ -90,11 +85,11 @@
               </tr>\
             ').appendTo($('table#history_table tbody'));
           });
-          
+
+          // re-genrate pagination
           $('ul.pagination li').remove();
           var pageCnt = msg.pagination.count;
-          //var curPage = msg.pagination.current;
-          
+
           var $pre = $('<li>\
             <a href="#" aria-label="Previous">\
               <span aria-hidden="true">&laquo;</span>\
@@ -105,7 +100,7 @@
             $pre.addClass('disabled');
           }
           $pre.appendTo($('ul.pagination'));
-          
+
           for (i=1; i<=pageCnt; i++) {
             $pg = $('<li><a href="#">'+i+'</a></li>');
             if (curPage == i) {
@@ -113,7 +108,7 @@
             }
             $pg.appendTo($('ul.pagination'));
           }
-          
+
           var $next = $('<li>\
             <a href="#" aria-label="Next">\
               <span aria-hidden="true">&raquo;</span>\
@@ -148,7 +143,7 @@
         });
       }
     });
-    
+
     // new track
     $('#newTrackButton').click(function (e) {
       var weightVal = $('form#form_new_track input#weight')[0].value;
@@ -156,9 +151,7 @@
       if (weightVal && dateVal) {
         var dateAr = dateVal.split('/');
         var date = new Date(dateAr[2] + '-' + dateAr[1] + '-' + dateAr[0]);
-        //console.log(weightVal);
-        //console.log(JSON.stringify({ weight: weightVal, date: date }));
-        
+
         $.ajax({
             type: "POST",
             url: baseUrl + 'user/' + wt_userId + '/track',
@@ -183,9 +176,7 @@
       if (weightVal && dateVal) {
         var dateAr = dateVal.split('/');
         var date = new Date(dateAr[2] + '-' + dateAr[1] + '-' + dateAr[0]);
-        //console.log(weightVal);
-        //console.log(JSON.stringify({ weight: weightVal, date: date }));
-        
+
         $.ajax({
             type: "PUT",
             url: baseUrl + 'user/' + wt_userId + '/track/' + date,
@@ -198,11 +189,11 @@
               flash_err('div#history', 'Track update failed, please try again.');
             }
           });
-        
+
           $('#editTrackModal').modal('hide');
       }
     });
-    
+
     $('.pagination').on('click', 'a', function (e) {
       e.preventDefault();
       curPage = $(this).html();
