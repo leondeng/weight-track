@@ -11,13 +11,9 @@ use Fan\WeightTrackBundle\Entity\User;
 use Fan\WeightTrackBundle\Entity\Goal;
 use Fan\WeightTrackBundle\Entity\Track;
 
-class WebServiceController extends Controller implements TransactionWrapController
+class WebServiceController extends Controller
 {
   const ERROR_CODE_BASE = 900;
-
-  public function needsRollback() {
-    return 'test' == $this->container->get( 'kernel' )->getEnvironment();
-  }
 
   private function saveEntity($object) {
     $this->getDoctrine()->getManager()->persist($object);

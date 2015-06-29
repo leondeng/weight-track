@@ -140,12 +140,14 @@ abstract class ControllerTestCase extends WebTestCase
    */
   protected function controllerAutomatedTest($method, $uri, $parameters, $files, $server, $content, $checks, $test_id) {
     $client = static::createClient();
+    $em = static::$kernel->getContainer()->get('doctrine')->getManager();
 
     $content = json_encode($content);
     $this->log(sprintf('Sending request data "%s"', $content), 2);
 
-    $url = sprintf('%s%s', $this->getConfig('base_url'), $uri); //FIXME: prepend app_test.php not working
+    $em->beginTransaction();
     $crawler = $client->request($method, $uri, $parameters, $files, $server, $content);
+    $em->rollback();
 
     $response = $client->getResponse();
     $statuscode = $response->getStatusCode();

@@ -1,4 +1,8 @@
 <?php
+/*
+ * We do not wrap transaction for testing by this way (instead, wrap directly in test class itself),
+ * however, we keep this listener in case of futrure usages such as user 'UNDO' from front end.
+ */
 
 namespace Fan\WeightTrackBundle\EventListener;
 
