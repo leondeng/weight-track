@@ -27,8 +27,9 @@
         "knplabs/knp-menu-bundle": "^2.0"
     },
     "require-dev": {
+        "leondeng/testube": "dev-master",
         "sensio/generator-bundle": "~2.3",
-        "phpunit/phpunit": "4.6.*"
+        "phpunit/phpunit": "^4.7"
     },
     "repositories": [
         {
@@ -41,6 +42,10 @@
                     "type": "file"
                 }
             }
+        },
+        {
+            "url": "git@github.com:leondeng/testube.git",
+            "type": "git"
         }
     ],
     "scripts": {

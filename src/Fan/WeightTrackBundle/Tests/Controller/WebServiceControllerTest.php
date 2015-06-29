@@ -2,6 +2,8 @@
 
 namespace Fan\WeightTrackBundle\Tests\Controller;
 
+use LeonDeng\TesTube\Symfony\ControllerTestCase;
+
 class WebServiceControllerTest extends ControllerTestCase
 {
 
