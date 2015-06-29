@@ -9,7 +9,6 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 use Doctrine\Common\Inflector\Inflector;
-use Doctrine\ORM\Query;
 
 class TestConfiguration implements ConfigurationInterface
 {
@@ -113,7 +112,6 @@ class TestConfiguration implements ConfigurationInterface
   public function getConfigSchemaForSystemSettings(NodeBuilder $node) {
     $node = $node
       ->scalarNode('base_url')
-        ->defaultValue('http://wtrack.localhost/app_test.php')
       ->end()
       ->scalarNode('test_filter')
       ->end()
