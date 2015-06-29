@@ -1,9 +1,6 @@
+[![Build Status](https://travis-ci.org/leondeng/weight-track.svg)](https://travis-ci.org/leondeng/weight-track)
+[![Code Quality](https://scrutinizer-ci.com/g/leondeng/weight-track/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/leondeng/weight-track/)
 [![Stories in Ready](https://badge.waffle.io/leondeng/weight-track.png?label=ready&title=Ready)](https://waffle.io/leondeng/weight-track)
-<div>
-<a href="https://travis-ci.org/leondeng/weight-track">
-<img title="Build Status Images" src="https://travis-ci.org/leondeng/weight-track.svg">
-</a>
-</div>
 
 <h1>Project</h1>
 
