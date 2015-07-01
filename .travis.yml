@@ -11,4 +11,4 @@ before_script:
 script:
   - phpunit -c app
 after_script:
-  - php vendor/bin/coveralls -v
+  - php vendor/satooshi/php-coveralls/composer/bin/coveralls -v
