@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/leondeng/weight-track.svg)](https://travis-ci.org/leondeng/weight-track)
+[![Coverage Status](https://coveralls.io/repos/leondeng/weight-track/badge.svg)](https://coveralls.io/r/leondeng/weight-track)
 [![Code Quality](https://scrutinizer-ci.com/g/leondeng/weight-track/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/leondeng/weight-track/)
 [![Stories in Ready](https://badge.waffle.io/leondeng/weight-track.png?label=ready&title=Ready)](https://waffle.io/leondeng/weight-track)
 
