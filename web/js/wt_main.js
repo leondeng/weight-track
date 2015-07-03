@@ -194,9 +194,18 @@
       }
     });
 
-    $('.pagination').on('click', 'a', function (e) {
+    $('.pagination li:not(.disabled):not(.active)').on('click', 'a', function (e) {
       e.preventDefault();
-      curPage = $(this).html();
+      
+      var p = $(this).html();
+      
+      if ($.isNumeric(p)) {
+        curPage = p;
+      } else if ($(this).attr('aria-label') == 'Next') {
+        curPage++;
+      } else {
+        curPage--;
+      }
       reloadHistory();
     });
   });

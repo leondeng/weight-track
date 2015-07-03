@@ -2473,7 +2473,7 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:leondeng/testube.git",
-                "reference": "6443188fc3c491eab2587511d79be75e6c0d5ba0"
+                "reference": "8e0931dca4d00597a63c592f9c0133af2274fb6d"
             },
             "require": {
                 "doctrine/inflector": "^1.0",
@@ -2496,7 +2496,7 @@
                 "TDD",
                 "testing"
             ],
-            "time": "2015-06-29 23:44:38"
+            "time": "2015-07-01 05:48:50"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
