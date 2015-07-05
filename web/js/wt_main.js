@@ -194,8 +194,13 @@
       }
     });
 
-    $('.pagination li:not(.disabled):not(.active)').on('click', 'a', function (e) {
+    $('.pagination').on('click', 'a', function (e) {
       e.preventDefault();
+      
+      $c = $(this).closest('li');
+      if ($c.hasClass('disabled') || $c.hasClass('active')) {
+        return false;
+      }
       
       var p = $(this).html();
       
