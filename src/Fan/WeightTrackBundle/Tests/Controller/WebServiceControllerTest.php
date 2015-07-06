@@ -19,7 +19,6 @@ class WebServiceControllerTest extends ControllerTestCase
    * @param array $server server parameters
    * @param string $content data posted
    * @param unknown $checks
-   * @param unknown $test_id
    * @dataProvider webserviceAutomatedProvider
    */
   public function testWebServices($method, $uri, $parameters, $files, $server, $content, $checks) {
