@@ -22,8 +22,8 @@ class WebServiceControllerTest extends ControllerTestCase
    * @param unknown $test_id
    * @dataProvider webserviceAutomatedProvider
    */
-  public function testWebServices($method, $uri, $parameters, $files, $server, $content, $checks, $test_id) {
-    return $this->controllerAutomatedTest($method, $uri, $parameters, $files, $server, $content, $checks, $test_id);
+  public function testWebServices($method, $uri, $parameters, $files, $server, $content, $checks) {
+    return $this->controllerAutomatedTest($method, $uri, $parameters, $files, $server, $content, $checks);
   }
 
   protected static function getConfigPaths() {
