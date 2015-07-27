@@ -162,21 +162,23 @@ class WebServiceController extends Controller
     return $serializer->serialize($object, 'json');
   }
 
-  private function responseJson($data, Request $request) {
+  private function responseJson($data) {
     $response = new Response($data, 200, array('Content-Type' => 'application/json'));
+
     $allow_request_headers = 'x-requested-with';
-    $response->headers->set('Access-Control-Allow-Origin', $this->getHttpOrigin($request));
+    $response->headers->set('Access-Control-Allow-Origin', $this->getHttpOrigin());
     $response->headers->set('Access-Control-Allow-Credentials', 'true');
     $response->headers->set('Access-Control-Max-Age', 1728000);
     $response->headers->set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, HEAD');
     $response->headers->set('Access-Control-Allow-Headers', $allow_request_headers);
+
     return $response;
   }
 
-  private function getHttpOrigin(Request $request) {
+  private function getHttpOrigin() {
     $httpOrigin = '';
 
-    $server = $request->server->getHeaders();
+    $server = $this->getRequest()->server->getHeaders();
     if (isset($server['ORIGIN'])) {
       $httpOrigin = $server['ORIGIN'];
     } else if (isset($server['REFERER'])) {
