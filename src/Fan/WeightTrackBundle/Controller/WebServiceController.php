@@ -96,7 +96,7 @@ class WebServiceController extends Controller
         $tracks = $pagination->getItems();
         if (count($tracks) > 0) {
           return $this->responseJson(sprintf('{"tracks":%s,"pagination":{"count":%d,"current":%d}}',
-              $this->serialize($tracks), $pagination->getPageCOunt(), $pagination->getCurrentPageNumber()), $request);
+              $this->serialize($tracks), $pagination->getPageCOunt(), $pagination->getCurrentPageNumber()));
         } else {
           return $this->err404('Tracks not found!');
         }
@@ -182,7 +182,7 @@ class WebServiceController extends Controller
   private function getHttpOrigin() {
     $httpOrigin = '';
 
-    $server = $this->getRequest()->server->getHeaders();
+    $server = $this->container->get('request_stack')->getCurrentRequest()->server->getHeaders();
     if (isset($server['ORIGIN'])) {
       $httpOrigin = $server['ORIGIN'];
     } else if (isset($server['REFERER'])) {
