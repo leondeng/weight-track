@@ -147,7 +147,8 @@ class WebServiceController extends Controller
         $em->remove($track);
         $em->flush();
 
-        return new JsonResponse(array('status' => 'ok'));
+        $response = new JsonResponse(array('status' => 'ok'));
+        return $this->generateCrossDomainHeader($response);
       } else {
         return $this->err404('Track not found!');
      }
@@ -164,7 +165,10 @@ class WebServiceController extends Controller
 
   private function responseJson($data) {
     $response = new Response($data, 200, array('Content-Type' => 'application/json'));
+    return $this->generateCrossDomainHeader($response);
+  }
 
+  private function generateCrossDomainHeader(Response $response) {
     $allow_request_headers = 'x-requested-with';
     $response->headers->set('Access-Control-Allow-Origin', $this->getHttpOrigin());
     $response->headers->set('Access-Control-Allow-Credentials', 'true');
@@ -189,15 +193,21 @@ class WebServiceController extends Controller
   }
 
   private function err400($msg) {
-    return new JsonResponse(array('message' => $msg), 400);
+    $response = new JsonResponse(array('message' => $msg), 400);
+
+    return $this->generateCrossDomainHeader($response);
   }
 
   private function err401($msg) {
-    return new JsonResponse(array('message' => $msg), 401);
+    $response = new JsonResponse(array('message' => $msg), 401);
+
+    return $this->generateCrossDomainHeader($response);
   }
 
   private function err404($msg) {
-    return new JsonResponse(array('message' => $msg), 404);
+    $response = new JsonResponse(array('message' => $msg), 404);
+
+    return $this->generateCrossDomainHeader($response);
   }
 
   private function err500(\Exception $e) {
@@ -205,7 +215,8 @@ class WebServiceController extends Controller
       'error_code' => $e->getCode(),
       'message' => $e->getMessage()
     );
+    $response = new JsonResponse($data, 500);
 
-    return new JsonResponse($data, 500);
+    return $this->generateCrossDomainHeader($response);
   }
 }
