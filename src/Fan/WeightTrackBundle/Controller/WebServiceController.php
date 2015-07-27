@@ -96,7 +96,7 @@ class WebServiceController extends Controller
         $tracks = $pagination->getItems();
         if (count($tracks) > 0) {
           return $this->responseJson(sprintf('{"tracks":%s,"pagination":{"count":%d,"current":%d}}',
-              $this->serialize($tracks), $pagination->getPageCOunt(), $pagination->getCurrentPageNumber()));
+              $this->serialize($tracks), $pagination->getPageCOunt(), $pagination->getCurrentPageNumber()), $request);
         } else {
           return $this->err404('Tracks not found!');
         }
@@ -162,8 +162,28 @@ class WebServiceController extends Controller
     return $serializer->serialize($object, 'json');
   }
 
-  private function responseJson($data) {
-    return new Response($data, 200, array('Content-Type' => 'application/json'));
+  private function responseJson($data, Request $request) {
+    $response = new Response($data, 200, array('Content-Type' => 'application/json'));
+    $allow_request_headers = 'x-requested-with';
+    $response->headers->set('Access-Control-Allow-Origin', $this->getHttpOrigin($request));
+    $response->headers->set('Access-Control-Allow-Credentials', 'true');
+    $response->headers->set('Access-Control-Max-Age', 1728000);
+    $response->headers->set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, HEAD');
+    $response->headers->set('Access-Control-Allow-Headers', $allow_request_headers);
+    return $response;
+  }
+
+  private function getHttpOrigin(Request $request) {
+    $httpOrigin = '';
+
+    $server = $request->server->getHeaders();
+    if (isset($server['ORIGIN'])) {
+      $httpOrigin = $server['ORIGIN'];
+    } else if (isset($server['REFERER'])) {
+      $httpOrigin = implode('/', array_slice(explode('/', $server['REFERER']), 0, 3));
+    }
+
+    return $httpOrigin;
   }
 
   private function err400($msg) {
