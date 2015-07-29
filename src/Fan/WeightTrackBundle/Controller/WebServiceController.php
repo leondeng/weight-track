@@ -95,8 +95,13 @@ class WebServiceController extends Controller
         );
         $tracks = $pagination->getItems();
         if (count($tracks) > 0) {
-          return $this->responseJson(sprintf('{"tracks":%s,"pagination":{"count":%d,"current":%d}}',
-              $this->serialize($tracks), $pagination->getPageCOunt(), $pagination->getCurrentPageNumber()));
+          return $this->responseJson(sprintf(
+            '{"tracks":%s,"pagination":{"count":%d,"current":%d,"total":%d}}',
+            $this->serialize($tracks),
+            $pagination->getPageCount(),
+            $pagination->getCurrentPageNumber(),
+            $pagination->getTotalItemCount()
+          ));
         } else {
           return $this->err404('Tracks not found!');
         }
