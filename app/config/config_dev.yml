@@ -62,7 +62,7 @@ doctrine:
         auto_mapping: true
 
 braincrafted_bootstrap:
-    less_filter: less
+    css_preprocessor: less
 
 assetic:
     filters:

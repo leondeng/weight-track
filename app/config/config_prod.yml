@@ -27,7 +27,7 @@ monolog:
             type:  console
 
 braincrafted_bootstrap:
-    less_filter: less
+    css_preprocessor: less
 
 assetic:
     filters:
