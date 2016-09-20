@@ -38,7 +38,7 @@
                 "name": "jquery/jquery",
                 "version": "1.11.1",
                 "dist": {
-                    "url": "http://code.jquery.com/jquery-1.11.1.js",
+                    "url": "https://code.jquery.com/jquery-1.11.1.js",
                     "type": "file"
                 }
             }
@@ -77,13 +77,13 @@
             "php app/console -e=dev doctrine:cache:clear-result"
         ],
         "dev:rebuild-db": [
-            "mysql -e 'CREATE DATABASE IF NOT EXISTS wtrack_dev;' -uroot",
+            "mysql -e 'CREATE DATABASE IF NOT EXISTS wtrack_dev;' -udev",
             "php app/console -e=dev doctrine:schema:drop --force",
             "php app/console -e=dev doctrine:schema:create",
             "php app/console -e=dev fan:load-fixtures"
         ],
         "test:rebuild-db": [
-            "mysql -e 'CREATE DATABASE IF NOT EXISTS wtrack_test;' -uroot",
+            "mysql -e 'CREATE DATABASE IF NOT EXISTS wtrack_test;' -udev",
             "php app/console -e=test doctrine:schema:drop --force",
             "php app/console -e=test doctrine:schema:create",
             "php app/console -e=test fan:load-fixtures"
